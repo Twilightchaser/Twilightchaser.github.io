@@ -1,0 +1,516 @@
+/* ==========================================================================
+   摄影作品站 · 样式表
+   所有数值按 Figma 设计稿（1440px 宽）实测还原。
+   想改颜色、字体、间距：优先改下面 :root 里的变量，全站会一起变。
+   ========================================================================== */
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../fonts/instrument-serif.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../fonts/instrument-serif-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* 颜色（取自设计稿） */
+  --bg: #f4f1eb;          /* 页面底色 */
+  --ink: #292c27;         /* 标题、正文主色 */
+  --muted: #74746a;       /* 小标签、说明文字 */
+  --rule: #cecfc3;        /* 分隔线 */
+  --accent: #8e4935;      /* 链接、当前页、箭头 */
+  --band: #e9e7df;        /* 浅色通栏 */
+  --forest: #30392f;      /* 深绿通栏（联系页） */
+  --on-dark: #faf8f3;     /* 深色底上的文字 */
+  --on-dark-muted: #c1c7b8;
+
+  /* 字体：英文用 Instrument Serif / Inter，中文自动落到后面的中文字体 */
+  --serif: "Instrument Serif", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+  --sans: "Inter", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+  /* 版心 */
+  --gutter: 64px;         /* 左右页边距 */
+  --max: 1440px;
+
+  /* 页脚与上方内容的距离：普通内容后 / 通栏色块后 */
+  --footer-gap: 173.58px;
+}
+
+/* ---------- 基础 ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, figure, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- 文字样式 ---------- */
+.label {                       /* 全大写小标签 */
+  display: block;
+  font: 400 11px/11px var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.serif { font-family: var(--serif); font-weight: 400; }
+.display-xl { font: 400 112px/110px var(--serif); letter-spacing: -0.02em; }
+.display-l  { font: 400 72px/72px var(--serif);  letter-spacing: -0.02em; }
+.title-36   { font: 400 36px/36px var(--serif); }
+.title-38   { font: 400 38px/38px var(--serif); }
+.body-14    { font: 400 14px/24px var(--sans); color: var(--muted); }
+
+/* 带下划线和箭头的文字链接 */
+.text-link {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 25px;
+  padding: 0 4px 9.23px 0;
+  border-bottom: 1px solid currentColor;
+  color: var(--accent);
+  font: 400 13px/13px var(--sans);
+  white-space: nowrap;
+}
+.text-link .arrow { width: 8px; height: 8px; margin-top: 2.23px; flex: none; }
+.arrow { display: block; overflow: visible; }
+.arrow path { fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.text-link:hover { opacity: 0.75; }
+
+/* 照片框：按设计稿尺寸裁切，等同 Figma 的 Fill */
+.frame { position: relative; overflow: hidden; background: var(--band); }
+.frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- 页眉 H ---------- */
+.site-header {
+  height: 104px;
+  border-bottom: 1px solid var(--rule);
+}
+.site-header .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.logo { margin-top: 37.3px; font: 400 30px/30px var(--serif); }
+.nav { display: flex; align-items: flex-start; gap: 36px; }
+.nav a { margin-top: 46.13px; font: 400 12px/12px var(--sans); }
+.nav a:hover { color: var(--accent); }
+.nav a[aria-current="page"] { color: var(--accent); }
+.nav .cta { margin-top: 41.27px; font-size: 13px; line-height: 13px; color: var(--accent); }
+
+/* ---------- 页脚 F ---------- */
+.site-footer { padding-top: var(--footer-gap); }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.footer-name { font: 400 38px/38px var(--serif); }
+.footer-top .label { margin-top: 19.42px; }
+.footer-links { display: flex; gap: 36.7px; margin-top: 26.05px; }
+.footer-links li, .footer-links a { display: block; font: 400 12px/12px var(--sans); }
+.footer-links a { color: var(--accent); }
+.footer-links .ar { margin-left: 2px; }   /* 设计稿里箭头前的间距略宽 */
+.footer-links a:hover { opacity: 0.75; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 48.5px;
+  padding: 23.5px 0 34.12px;
+  border-top: 1px solid var(--rule);
+}
+.footer-bottom .small { font: 400 11px/11px var(--sans); color: var(--muted); }
+.footer-bottom .made { margin-top: 1.38px; font: italic 400 18px/18px var(--serif); color: var(--muted); }
+
+/* ---------- 通用：区块标题（小标签 + 大标题 + 右侧链接） ---------- */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.section-head h1,
+.section-head h2 { margin-top: 29.02px; }
+.section-head .text-link { margin-bottom: -11.48px; }
+
+/* ---------- 首页 A ---------- */
+.hero { padding-top: 60.92px; }
+.hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.hero-aside { width: 264px; margin-top: 105.58px; }
+.hero-aside p { margin-top: 26.91px; font: 400 14px/23px var(--sans); color: var(--muted); }
+.hero-figure { margin-top: 53.08px; }
+.hero-figure .frame { height: 600px; }
+.caption-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 19.5px;
+  white-space: nowrap;
+}
+.hero-rule { height: 1px; margin: 46.5px 0 0; background: var(--rule); border: 0; }
+
+.home-work { padding-top: 49.5px; }
+
+/* 作品卡片 */
+.work-grid {
+  display: grid;
+  grid-template-columns: 736fr 496fr;
+  column-gap: 80px;
+  align-items: start;
+  margin-top: 59.48px;
+}
+.work-card { display: block; }
+.work-card .frame { aspect-ratio: 736 / 510; }
+.work-card.tall { margin-top: 126px; }
+.work-card.tall .frame { aspect-ratio: 496 / 584; }
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 23.76px;
+}
+.card-title .arrow { width: 10.6px; height: 10.6px; margin: 23.44px 6.2px 0 0; color: var(--accent); flex: none; }
+.work-card .label { margin-top: 15.74px; }
+.work-card:hover .card-title h3 { color: var(--accent); }
+
+/* ---------- 作品页 B ---------- */
+.page-work { padding-top: 70.5px; }
+.feature-row {
+  display: grid;
+  grid-template-columns: 448fr 864fr;
+  align-items: start;
+  margin-top: 48.5px;
+}
+.feature-row .work-card .frame { aspect-ratio: 864 / 480; }
+.feature-text { max-width: 345px; margin-top: 167.5px; }
+.feature-text h2 { max-width: 320px; margin-top: 24.26px; font: 400 36px/42px var(--serif); }
+.feature-text p { margin-top: 24.15px; }
+.feature-row .work-card { grid-column: 2; }
+
+/* ---------- 关于页 C ---------- */
+.about-intro {
+  display: grid;
+  grid-template-columns: 496fr 672fr;
+  column-gap: 144px;
+  align-items: start;
+  padding-top: 120px;
+}
+.about-intro .frame { aspect-ratio: 496 / 584; }
+.about-intro figcaption { margin-top: 19.5px; }
+.about-text { margin-top: 64.5px; }
+.about-text h1 { margin-top: 30.56px; font: 400 66px/69px var(--serif); letter-spacing: -0.014em; }
+.about-text .lead { margin-top: 31.12px; font: 400 16px/26px var(--sans); letter-spacing: -0.0027em; color: var(--ink); }
+.about-text .body-15 { font: 400 15px/27px var(--sans); letter-spacing: 0.0014em; color: var(--muted); }
+.about-text .lead + .body-15 { margin-top: 30.86px; }
+.about-text .body-15 + .body-15 { margin-top: 30px; }
+.about-text .text-link { margin-top: 31.73px; }
+
+.about-rule { height: 1px; margin: 120.5px 0 0; background: var(--rule); border: 0; }
+.process-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 49.76px;
+}
+.process-head .label { margin-top: 12.74px; }
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 72px;
+  margin-top: 50.74px;
+}
+.process-grid .num { color: var(--accent); }
+.process-grid h3 { margin-top: 26.26px; }
+.process-grid p { margin-top: 25.65px; font: 400 14px/25px var(--sans); color: var(--muted); }
+
+/* ---------- 手记页 D ---------- */
+.page-journal { padding-top: 105.5px; }
+.page-journal .section-head h1 { margin-top: 28.7px; font: 400 70px/70px var(--serif); letter-spacing: -0.016em; }
+.page-journal .section-head .text-link { margin-bottom: -10.8px; }
+.journal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  margin-top: 54.8px;
+}
+.entry .frame { aspect-ratio: 636 / 360; }
+.entry .label { margin-top: 21.5px; }
+.entry h2 { margin-top: 25.58px; }
+.entry p { max-width: 540px; margin-top: 25.83px; }
+.entry:hover h2 { color: var(--accent); }
+
+.essay {
+  position: relative;
+  height: 800px;
+  margin-top: 104.09px;
+  color: var(--on-dark);
+  background: var(--forest);
+}
+.essay > .frame { position: absolute; inset: 0; background: var(--forest); }
+.essay > .frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* 设计稿里的暗色渐变（实测拟合），保证照片上的白字看得清 */
+  background: linear-gradient(to bottom,
+    rgba(16, 27, 20, 0) 0%,
+    rgba(16, 27, 20, 0.1) 15%,
+    rgba(16, 27, 20, 0.245) 31%,
+    rgba(16, 27, 20, 0.395) 50%,
+    rgba(16, 27, 20, 0.56) 72%,
+    rgba(16, 27, 20, 0.66) 84%,
+    rgba(16, 27, 20, 0.74) 100%);
+}
+.essay .wrap {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 64.5px;
+}
+.essay .label { color: var(--on-dark-muted); }
+.essay h2 { margin-top: 29.9px; font: 400 90px/90px var(--serif); letter-spacing: -0.016em; }
+.essay p { max-width: 620px; margin-top: 29.51px; font: 400 14px/24px var(--sans); color: var(--on-dark); }
+.essay .essay-place { margin-top: 57.59px; }
+.essay .text-link {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 209px;
+  color: var(--on-dark);
+  border-bottom-color: var(--on-dark-muted);
+}
+
+/* ---------- 联系页 E ---------- */
+.contact {
+  position: relative;
+  height: 523px;
+  background: var(--forest);
+  color: var(--on-dark);
+}
+.contact .wrap { position: relative; height: 100%; padding-top: 91.5px; }
+.contact .label { color: var(--on-dark-muted); }
+.contact-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.availability { display: flex; align-items: center; gap: 9px; }
+.availability::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-top: -0.5px;
+  border-radius: 50%;
+  background: var(--on-dark-muted);
+}
+.contact h1 { margin-top: 38.5px; font: 400 100px/102px var(--serif); letter-spacing: -0.016em; }
+.contact p { margin-top: 38.41px; font: 400 14px/25px var(--sans); color: var(--on-dark-muted); }
+.circle-link {
+  position: absolute;
+  top: 180px;
+  right: calc(var(--gutter) - 1px);
+  display: grid;
+  place-items: center;
+  width: 126px;
+  height: 126px;
+  border: 1px solid var(--on-dark-muted);
+  border-radius: 50%;
+  color: var(--on-dark);
+  transition: background-color 0.2s ease;
+}
+.circle-link:hover { background: rgba(250, 248, 243, 0.08); }
+.circle-link .arrow { width: 20.2px; height: 20.2px; }
+.contact .email {
+  position: absolute;
+  top: 409.77px;
+  right: var(--gutter);
+  color: var(--on-dark);
+  border-bottom-color: var(--on-dark-muted);
+}
+body.on-contact { --footer-gap: 61.08px; }
+body.has-band { --footer-gap: 61.08px; }
+
+/* ==========================================================================
+   平板（≤1200px）：设计稿只有 1440 桌面版，以下是按同一风格补的适配
+   ========================================================================== */
+@media (max-width: 1200px) {
+  :root { --gutter: 40px; --footer-gap: 120px; }
+  body.has-band { --footer-gap: 56px; }
+  .nav { gap: 28px; }
+  .display-xl { font-size: 84px; line-height: 0.98; }
+  .display-l { font-size: 56px; line-height: 1; }
+  .title-36 { font-size: 30px; line-height: 1.1; }
+  .title-38 { font-size: 32px; line-height: 1.1; }
+  .hero-figure .frame { height: auto; aspect-ratio: 1312 / 600; }
+  .work-grid { column-gap: 48px; }
+  .card-title .arrow { margin-top: 18px; }
+  .about-intro { grid-template-columns: 1fr 1fr; column-gap: 64px; padding-top: 80px; }
+  .about-text { margin-top: 24px; }
+  .about-text h1 { font-size: 52px; line-height: 1.05; }
+  .process-grid { column-gap: 40px; }
+  .page-journal .section-head h1 { font-size: 56px; line-height: 1; }
+  .essay { height: 640px; }
+  .essay h2 { font-size: 68px; line-height: 1; }
+  .contact { height: auto; }
+  .contact .wrap { padding-top: 72px; padding-bottom: 80px; }
+  .contact h1 { font-size: 72px; line-height: 1.02; }
+  .circle-link { top: 150px; width: 104px; height: 104px; }
+  .contact .email { position: static; margin-top: 40px; }
+}
+
+/* ==========================================================================
+   手机（≤760px）
+   ========================================================================== */
+@media (max-width: 760px) {
+  :root { --gutter: 20px; --footer-gap: 88px; }
+  body.has-band { --footer-gap: 48px; }
+
+  /* 页眉：名字一行，导航换到第二行 */
+  .site-header { height: auto; padding: 18px 0 14px; }
+  .site-header .wrap { flex-wrap: wrap; row-gap: 14px; }
+  .logo { margin-top: 0; font-size: 26px; line-height: 1.1; }
+  .nav { width: 100%; flex-wrap: wrap; gap: 10px 20px; align-items: baseline; }
+  .nav a { margin-top: 0; font-size: 13px; line-height: 20px; }
+  .nav .cta { margin: 0 0 0 auto; line-height: 20px; padding-bottom: 2px; }
+  .nav .cta .arrow { margin-top: 6px; }
+
+  .display-xl { font-size: 46px; line-height: 1; letter-spacing: -0.015em; }
+  .display-l { font-size: 38px; line-height: 1.05; letter-spacing: -0.015em; }
+  .title-36, .title-38 { font-size: 27px; line-height: 1.15; }
+
+  /* 首页 */
+  .hero { padding-top: 36px; }
+  .hero-top { flex-direction: column; }
+  .hero-aside { width: auto; max-width: 30em; margin-top: 24px; }
+  .hero-aside p { margin-top: 12px; }
+  .hero-figure { margin-top: 32px; }
+  .hero-figure .frame { aspect-ratio: 4 / 3; }
+  .caption-row { flex-direction: column; gap: 8px; margin-top: 14px; white-space: normal; }
+  .scroll-hint { display: none; }
+  .hero-rule { margin-top: 40px; }
+  .home-work { padding-top: 40px; }
+
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .section-head h1, .section-head h2 { margin-top: 14px; }
+  .section-head .text-link { margin: 22px 0 0; }
+
+  .work-grid { grid-template-columns: 1fr; row-gap: 44px; margin-top: 36px; }
+  .work-card.tall { margin-top: 0; }
+  .card-title { margin-top: 16px; align-items: center; }
+  .card-title .arrow { margin: 0 4px 0 0; }
+  .work-card .label { margin-top: 10px; }
+
+  /* 作品页 */
+  .page-work { padding-top: 40px; }
+  .feature-row { grid-template-columns: 1fr; row-gap: 28px; margin-top: 56px; }
+  .feature-row .work-card { grid-column: auto; }
+  .feature-text { max-width: none; margin-top: 0; }
+  .feature-text h2 { max-width: none; margin-top: 14px; font-size: 28px; line-height: 1.2; }
+  .feature-text p { margin-top: 14px; }
+
+  /* 关于页 */
+  .about-intro { grid-template-columns: 1fr; padding-top: 32px; }
+  .about-intro figcaption { margin-top: 12px; }
+  .about-text { margin-top: 44px; }
+  .about-text h1 { margin-top: 16px; font-size: 40px; line-height: 1.08; }
+  .about-text .lead { margin-top: 20px; }
+  .about-text .lead + .body-15 { margin-top: 18px; }
+  .about-text .body-15 + .body-15 { margin-top: 16px; }
+  .about-text .text-link { margin-top: 24px; }
+  .about-rule { margin-top: 64px; }
+  .process-head { flex-direction: column; padding-top: 36px; }
+  .process-head .label { margin-top: 0; }
+  .process-head h2 { margin-top: 14px; font-size: 27px; line-height: 1.15; }
+  .process-grid { grid-template-columns: 1fr; row-gap: 36px; margin-top: 36px; }
+  .process-grid h3 { margin-top: 12px; }
+  .process-grid p { margin-top: 12px; }
+
+  /* 手记页 */
+  .page-journal { padding-top: 40px; }
+  .page-journal .section-head h1 { margin-top: 14px; font-size: 40px; line-height: 1.05; }
+  .page-journal .section-head .text-link { margin-bottom: 0; }
+  .journal-grid { grid-template-columns: 1fr; row-gap: 44px; margin-top: 36px; }
+  .entry .label { margin-top: 14px; }
+  .entry h2 { margin-top: 12px; }
+  .entry p { margin-top: 10px; }
+  .essay { height: auto; min-height: 560px; margin-top: 72px; }
+  .essay .wrap { min-height: 560px; padding-top: 120px; padding-bottom: 36px; }
+  .essay h2 { margin-top: 14px; font-size: 46px; line-height: 1.02; }
+  .essay p { margin-top: 14px; }
+  .essay .essay-place { margin-top: 28px; }
+  .essay .text-link { position: static; align-self: flex-start; margin-top: 24px; }
+
+  /* 联系页 */
+  .contact .wrap { padding-top: 48px; padding-bottom: 56px; }
+  .contact-top { flex-direction: column; gap: 14px; }
+  .contact h1 { margin-top: 28px; font-size: 46px; line-height: 1.04; }
+  .contact h1 br, .contact p br { display: none; }
+  .contact p { margin-top: 20px; }
+  .circle-link { display: none; }
+  .contact .email { margin-top: 28px; }
+
+  /* 页脚 */
+  .footer-top { flex-direction: column; }
+  .footer-name { font-size: 30px; line-height: 1.1; }
+  .footer-top .label { margin-top: 12px; }
+  .footer-links { flex-wrap: wrap; gap: 12px 24px; margin-top: 24px; }
+  .footer-bottom { flex-direction: column; gap: 10px; margin-top: 32px; padding: 20px 0 28px; }
+  .footer-bottom .made { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ==========================================================================
+   元素编号（精确修改用）：网址后面加 #ids 打开，会在每个元素上显示编号。
+   放在 @layer 里，优先级最低，不会改动页面原有布局。
+   ========================================================================== */
+@layer ids {
+  .show-ids [data-id] { position: relative; outline: 1px dashed rgba(142, 73, 53, 0.6); outline-offset: 2px; }
+  .show-ids [data-id]::after {
+    content: attr(data-id);
+    position: absolute;
+    z-index: 10;
+    top: -3px;
+    left: -3px;
+    transform: translateY(-100%);
+    padding: 2px 6px;
+    background: var(--accent);
+    color: #fff;
+    font: 400 12px/1.25 var(--sans);
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .show-ids .frame[data-id]::after { top: 10px; left: 10px; transform: none; }
+  .show-ids .nav[data-id]::after { top: 6px; transform: none; }
+}

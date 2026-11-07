@@ -1,0 +1,171 @@
+/* 网页编辑器的样式：只在网址末尾加 #edit 时加载，访客看不到 */
+
+.is-editing [data-e] {
+  outline: 1px dashed rgba(142, 73, 53, 0.45);
+  outline-offset: 3px;
+  cursor: text;
+}
+.is-editing [data-e]:hover { outline-color: rgba(142, 73, 53, 0.9); }
+.is-editing [data-e]:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.is-editing [data-e].ed-changed { outline-style: solid; outline-color: rgba(142, 73, 53, 0.7); }
+.is-editing [data-e]:empty::before { content: "（空）"; color: var(--muted); }
+.is-editing .contact [data-e],
+.is-editing .essay [data-e] { outline-color: rgba(250, 248, 243, 0.45); }
+.is-editing .contact [data-e]:focus,
+.is-editing .essay [data-e]:focus { outline-color: var(--on-dark); }
+.is-editing a { cursor: text; }
+.is-editing body { padding-bottom: 120px; }   /* 给底部工具栏留位置 */
+.is-editing .work-card:hover h3,
+.is-editing .entry:hover h2 { color: inherit; }
+
+/* 照片上的按钮 */
+.ed-img-tools {
+  position: absolute;
+  z-index: 5;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+.ed-btn {
+  appearance: none;
+  border: 1px solid rgba(41, 44, 39, 0.25);
+  border-radius: 999px;
+  padding: 7px 14px;
+  background: rgba(250, 248, 243, 0.94);
+  color: var(--ink);
+  font: 400 13px/1.2 var(--sans);
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ed-btn:hover { background: #fff; }
+.ed-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ed-btn.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+.ed-btn.primary:hover { background: #7a3e2d; }
+.ed-btn[disabled] { opacity: 0.5; cursor: default; }
+
+.ed-alt {
+  position: absolute;
+  z-index: 5;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(250, 248, 243, 0.96);
+  color: var(--ink);
+  font: 400 13px/1.4 var(--sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ed-alt label { white-space: nowrap; }
+.ed-input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(41, 44, 39, 0.25);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: 400 14px/1.3 var(--sans);
+}
+.ed-input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+
+/* 链接地址小窗 */
+.ed-pop {
+  position: absolute;
+  z-index: 60;
+  width: 320px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
+  font: 400 13px/1.5 var(--sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ed-pop p { margin: 0 0 8px; color: var(--muted); }
+.ed-pop .ed-input { width: 100%; }
+
+/* 底部工具栏 */
+.ed-bar {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: min(960px, calc(100% - 24px));
+  padding: 10px 12px 10px 18px;
+  border-radius: 14px;
+  background: #292c27;
+  color: #faf8f3;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  font: 400 13px/1.4 var(--sans);
+}
+.ed-bar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.ed-bar strong { font-weight: 500; }
+.ed-bar .ed-count { color: #c1c7b8; }
+.ed-bar .ed-spacer { flex: 1; }
+.ed-bar select {
+  padding: 6px 8px;
+  border: 1px solid rgba(250, 248, 243, 0.3);
+  border-radius: 8px;
+  background: transparent;
+  color: #faf8f3;
+  font: inherit;
+}
+.ed-bar select option { color: #292c27; }
+.ed-bar .ed-btn { border-color: rgba(250, 248, 243, 0.35); background: transparent; color: #faf8f3; }
+.ed-bar .ed-btn:hover { background: rgba(250, 248, 243, 0.1); }
+.ed-bar .ed-btn.primary { border-color: #c96b4f; background: #b55a3f; }
+.ed-bar .ed-btn.primary:hover { background: #a24f36; }
+.ed-hint { margin-top: 6px; color: #c1c7b8; font-size: 12px; }
+.ed-msg { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: rgba(250, 248, 243, 0.1); }
+.ed-msg.ok { background: rgba(120, 170, 110, 0.25); }
+.ed-msg.err { background: rgba(200, 90, 70, 0.3); }
+.ed-msg a { color: #fff; text-decoration: underline; }
+
+/* 发布设置 */
+.ed-modal-bg {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(20, 22, 19, 0.5);
+}
+.ed-modal {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 24px;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font: 400 14px/1.6 var(--sans);
+}
+.ed-modal h2 { margin: 0 0 6px; font: 400 26px/1.2 var(--serif); }
+.ed-modal p { margin: 0 0 14px; color: #55564f; }
+.ed-modal ol { margin: 0 0 16px; padding-left: 20px; color: #55564f; }
+.ed-modal li { margin: 2px 0; }
+.ed-modal label { display: block; margin: 12px 0 4px; font-weight: 500; }
+.ed-modal .ed-input { width: 100%; }
+.ed-modal .ed-check { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-weight: 400; }
+.ed-modal .ed-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.ed-modal .ed-btn { background: #fff; }
+.ed-modal .ed-btn.primary { background: var(--accent); }
+.ed-modal a { color: var(--accent); text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .is-editing body { padding-bottom: 170px; }
+  .ed-bar { bottom: 8px; padding: 10px; }
+  .ed-hint { display: none; }
+  .ed-pop { width: calc(100vw - 32px); }
+}
